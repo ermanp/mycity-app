@@ -1,5 +1,6 @@
 package com.mycity.service.impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mycity.dto.PostDto;
 import com.mycity.entity.Post;
 import com.mycity.repository.PostRepository;
@@ -21,11 +22,13 @@ public class PostServiceImpl implements PostService
 {
     private final PostRepository postRepository;
     private final ModelMapper modelMapper;
+    private final ObjectMapper objectMapper;
 
-    public PostServiceImpl(PostRepository postRepository, ModelMapper modelMapper)
+    public PostServiceImpl(PostRepository postRepository, ModelMapper modelMapper, ObjectMapper objectMapper)
     {
         this.postRepository = postRepository;
         this.modelMapper = modelMapper;
+        this.objectMapper = objectMapper;
     }
 
     @Override
@@ -43,7 +46,8 @@ public class PostServiceImpl implements PostService
     @Override
     public PostDto getById(Long id)
     {
-        return null;
+        Post p = postRepository.getOne(id);
+        return modelMapper.map(p,PostDto.class);
     }
 
     @Override
