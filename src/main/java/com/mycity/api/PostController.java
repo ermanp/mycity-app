@@ -4,10 +4,7 @@ package com.mycity.api;
 import com.mycity.dto.PostDto;
 import com.mycity.service.PostService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 /**
@@ -24,11 +21,15 @@ public class PostController
         this.postServiceImpl = postServiceImpl;
     }
 
-
     @GetMapping("/{id}")
     public ResponseEntity<PostDto> getById(@PathVariable("id") Long id){
         PostDto postDto = postServiceImpl.getById(id);
         return ResponseEntity.ok(postDto);
+    }
+
+    @PostMapping()
+    public ResponseEntity<PostDto> createPost(@RequestBody PostDto post){
+       return ResponseEntity.ok(postServiceImpl.save(post));
     }
 
 

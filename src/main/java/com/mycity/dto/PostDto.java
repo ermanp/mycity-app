@@ -6,6 +6,7 @@ import com.mycity.entity.User;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -13,10 +14,14 @@ import java.util.Date;
  */
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class PostDto
 {
     private Long id;
+    @NotNull
     private String title;
+    @NotNull
     private String description;
     private UserDto user;
     private Date date;

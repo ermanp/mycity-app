@@ -34,9 +34,9 @@ public class PostServiceImpl implements PostService
     @Override
     public PostDto save(PostDto post)
     {
-        if (post.getDate() == null)
+       /* if (post.getDate() == null)
             throw new IllegalArgumentException("Post Date cannot be null");
-
+*/
         Post postDb = modelMapper.map(post, Post.class);
         postDb = postRepository.save(postDb);
 
