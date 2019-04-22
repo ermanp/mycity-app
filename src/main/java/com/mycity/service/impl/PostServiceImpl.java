@@ -4,10 +4,13 @@ import com.mycity.dto.PostDto;
 import com.mycity.entity.Post;
 import com.mycity.repository.PostRepository;
 import com.mycity.service.PostService;
+import com.mycity.util.TPage;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
 
 /**
  * Created by erman.payasli on 22.04.2019
@@ -44,9 +47,15 @@ public class PostServiceImpl implements PostService
     }
 
     @Override
-    public Page<PostDto> getAllPageable(Pageable pageable)
+    public TPage<PostDto> getAllPageable(Pageable pageable)
     {
-        return null;
+        Page<Post> data = postRepository.findAll(pageable);
+
+        TPage page = new TPage<PostDto>();
+        PostDto[] dtos = modelMapper.map(data.getContent(), PostDto[].class);
+        page.setStat(data, Arrays.asList(dtos));
+
+        return page;
     }
 
     @Override
