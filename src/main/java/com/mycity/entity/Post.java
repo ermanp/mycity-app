@@ -5,6 +5,7 @@ import com.mycity.entity.BaseEntity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,6 +30,13 @@ public class Post extends BaseEntity
 
     @Column(name = "DESCRIPTION",length = 1000)
     private String description;
+
+    @Column(name = "DETAILS", length = 4000)
+    private String details;
+
+    @Column(name = "DATE")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
 
     @JoinColumn(name = "POSTED_USER_ID")
     @ManyToOne(optional = true,fetch = FetchType.LAZY)
