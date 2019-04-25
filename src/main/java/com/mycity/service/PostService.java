@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -24,4 +25,8 @@ public interface PostService
     TPage<PostDto> getAllPageable(Pageable pageable);
 
     Boolean delete(PostDto post);
+
+    Boolean deleteById(Long id);
+
+    PostDto update(Long id, PostDto post);
 }

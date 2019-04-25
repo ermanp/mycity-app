@@ -67,4 +67,33 @@ public class PostServiceImpl implements PostService
     {
         return null;
     }
+
+    public Boolean deleteById(Long id)
+    {
+        try
+        {
+            postRepository.deleteById(id);
+        }catch (Exception e){
+            return false;
+        }
+
+        return true;
+    }
+
+
+    @Override
+    public PostDto update(Long id, PostDto post)
+    {
+        Post editedPost = postRepository.getOne(id);
+        if (editedPost == null)
+            throw new IllegalArgumentException("The post does not exist id: " + id);
+
+        editedPost.setDate(post.getDate());
+        editedPost.setDescription(post.getDescription());
+        editedPost.setTitle(post.getTitle());
+
+        postRepository.save(editedPost);
+        return modelMapper.map(editedPost,PostDto.class);
+
+    }
 }
